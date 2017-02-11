@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hello</title>
+</head>
+<body>
+<h2>请上传你的照片,让我猜猜你的颜值和年龄！</h2><br>
+<h3>服务限制:人脸识别服务对图片格式、图片大小有限制，格式支持jpg、png，长宽都要小于2048px。图片大小不超过1M,每次只能传一张照片。</h3><br>
+<form name="form1" method="POST" action="/data/" enctype="multipart/form-data">
+	<input type="file" name="image">
+	<select name="type">
+		<option value="face">人脸检测</option>
+		<option value="text">文字检测</option>
+	</select>
+	<input type="submit" name="submit">
+</form>
+
+{% if flag %}
+<hr>
+<img src="/static/img/{{ filename }}"><br>
+{% if error %}
+<h3>错误信息： {{ info }}</h3>
+{% else %}
+<h3>图中人脸数目： {{ result_num }}</h3>
+<h3>年龄： {{ age }}</h3>
+<h3>颜值打分： {{ beauty }}</h3>
+<h3>表情： {{ expr }}</h3>
+<h3>是否戴眼镜： {{ glasses }}</h3>
+<h3>性别： {{ gender }}</h3>
+<h3>脸型： {{ faceshape }}</h3>
+{% endif %}
+
+{% endif %}
+
+{% if istext %}
+<hr>
+<img src="/static/img/{{ filename }}"><br>
+<img src="/static/img/temp.png"><br>
+<h1>图中文字为：{{ words }}</h1>
+{% endif %}
+</body>
+</html>
